@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://callforus.it/sitemap.xml
