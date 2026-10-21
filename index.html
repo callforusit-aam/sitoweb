@@ -76,6 +76,7 @@
       <a class="btn btn--ink" href="#audit">Richiedi l'audit gratuito</a>
     </div>
   </nav>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 </header>
 
 <main id="inizio">
@@ -91,28 +92,29 @@
               <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="8" height="8" fill="#FFFFFF"/><path d="M0 0v8" stroke="#E0E0DB" stroke-width="3"/></pattern>
             </defs>
             <!-- floor -->
-            <ellipse cx="262" cy="472" rx="200" ry="22" fill="#E6E6E1"/>
+            <ellipse class="a-floor" cx="262" cy="472" rx="200" ry="22" fill="#E6E6E1"/>
             <!-- browser window with rising chart, behind the box -->
-            <g transform="matrix(0.866 0.5 0 1 318 6)">
+            <g class="a-window"><g transform="matrix(0.866 0.5 0 1 318 6)">
               <rect x="0" y="0" width="176" height="150" rx="12" fill="#FFFFFF" stroke="#0B0B0C" stroke-width="3" vector-effect="non-scaling-stroke"/>
               <path d="M0 26H176" stroke="#0B0B0C" stroke-width="3" vector-effect="non-scaling-stroke"/>
               <circle cx="14" cy="13" r="4" fill="#0B0B0C"/><circle cx="27" cy="13" r="4" fill="#FCCD10" stroke="#0B0B0C" stroke-width="1.5" vector-effect="non-scaling-stroke"/><circle cx="40" cy="13" r="4" fill="#FFFFFF" stroke="#0B0B0C" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
               <g stroke="#0B0B0C" stroke-width="2.5" vector-effect="non-scaling-stroke">
-                <rect x="22" y="104" width="20" height="30" fill="#FFFFFF" vector-effect="non-scaling-stroke"/>
-                <rect x="54" y="88" width="20" height="46" fill="url(#hatch)" vector-effect="non-scaling-stroke"/>
-                <rect x="86" y="70" width="20" height="64" fill="#FCCD10" vector-effect="non-scaling-stroke"/>
-                <rect x="118" y="48" width="20" height="86" fill="#FCCD10" vector-effect="non-scaling-stroke"/>
+                <rect class="a-bar" style="--i:0" x="22" y="104" width="20" height="30" fill="#FFFFFF" vector-effect="non-scaling-stroke"/>
+                <rect class="a-bar" style="--i:1" x="54" y="88" width="20" height="46" fill="url(#hatch)" vector-effect="non-scaling-stroke"/>
+                <rect class="a-bar" style="--i:2" x="86" y="70" width="20" height="64" fill="#FCCD10" vector-effect="non-scaling-stroke"/>
+                <rect class="a-bar" style="--i:3" x="118" y="48" width="20" height="86" fill="#FCCD10" vector-effect="non-scaling-stroke"/>
               </g>
-              <path d="M20 92 L62 76 L96 56 L150 34" fill="none" stroke="#0B0B0C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-              <path d="M138 30 L154 32 L148 46" fill="none" stroke="#0B0B0C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-            </g>
+              <path class="a-line" pathLength="1" d="M20 92 L62 76 L96 56 L150 34" fill="none" stroke="#0B0B0C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              <path class="a-head" d="M138 30 L154 32 L148 46" fill="none" stroke="#0B0B0C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+            </g></g>
             <!-- small floating cube -->
-            <g stroke="#0B0B0C" stroke-width="2.5" stroke-linejoin="round">
+            <g class="a-cube" stroke="#0B0B0C" stroke-width="2.5" stroke-linejoin="round">
               <path d="M70 52 L101.2 70 L70 88 L38.8 70 Z" fill="#FCCD10"/>
               <path d="M38.8 70 L70 88 L70 124 L38.8 106 Z" fill="#FFFFFF"/>
               <path d="M70 88 L101.2 70 L101.2 106 L70 124 Z" fill="url(#hatch)"/>
             </g>
             <!-- FBA box: top P(262,118) s=180 -->
+            <g class="a-box">
             <g stroke="#0B0B0C" stroke-width="3" stroke-linejoin="round">
               <path d="M262 118 L417.9 208 L262 298 L106.1 208 Z" fill="#FFFFFF"/>
               <path d="M106.1 208 L262 298 L262 478 L106.1 388 Z" fill="#FFFFFF"/>
@@ -132,6 +134,7 @@
               <g fill="#0B0B0C"><rect x="46" y="78" width="3" height="18"/><rect x="52" y="78" width="6" height="18"/><rect x="61" y="78" width="2" height="18"/><rect x="66" y="78" width="5" height="18"/><rect x="74" y="78" width="3" height="18"/><rect x="80" y="78" width="7" height="18"/><rect x="90" y="78" width="2" height="18"/><rect x="95" y="78" width="4" height="18"/><rect x="102" y="78" width="3" height="18"/><rect x="108" y="78" width="6" height="18"/></g>
               <text x="34" y="128" font-family="Montserrat, Arial, sans-serif" font-size="15" font-weight="800" fill="#0B0B0C" letter-spacing="1">FBA · IT → DE</text>
             </g>
+            </g>
           </svg>
           <span class="chip chip--a"><i><svg><use href="#i-check"/></svg></i>Schede ottimizzate</span>
           <span class="chip chip--b"><i><svg><use href="#i-up"/></svg></i>Campagne PPC sotto controllo</span>
@@ -144,8 +147,8 @@
           <div class="phone-tabs"><span class="on">Vendite</span><span>PPC</span><span>FBA</span></div>
           <div class="phone-card">
             <div class="lab"><span>Vendite ultimi 7 gg</span><span>amazon.it</span></div>
-            <div class="num">€ 12.480 <em>▲ 18%</em></div>
-            <svg class="spark" viewBox="0 0 220 46" preserveAspectRatio="none"><path d="M0 40 L30 36 L60 38 L90 28 L120 30 L150 20 L180 14 L220 6 L220 46 L0 46 Z" fill="#FFF5C7"/><path d="M0 40 L30 36 L60 38 L90 28 L120 30 L150 20 L180 14 L220 6" fill="none" stroke="#0B0B0C" stroke-width="2"/><circle cx="217" cy="7" r="3.5" fill="#FCCD10" stroke="#0B0B0C" stroke-width="1.5"/></svg>
+            <div class="num"><span data-count="12480" data-prefix="€ ">€ 12.480</span> <em>▲ 18%</em></div>
+            <svg class="spark" viewBox="0 0 220 46" preserveAspectRatio="none"><path class="a-area" d="M0 40 L30 36 L60 38 L90 28 L120 30 L150 20 L180 14 L220 6 L220 46 L0 46 Z" fill="#FFF5C7"/><path class="a-spark" pathLength="1" d="M0 40 L30 36 L60 38 L90 28 L120 30 L150 20 L180 14 L220 6" fill="none" stroke="#0B0B0C" stroke-width="2"/><circle class="a-dot" cx="217" cy="7" r="3.5" fill="#FCCD10" stroke="#0B0B0C" stroke-width="1.5"/></svg>
           </div>
           <div class="phone-rows"><div><small>ACoS</small><b>19,4%</b></div><div><small>Sessioni</small><b>3.420</b></div></div>
         </div>
@@ -164,9 +167,12 @@
   <div class="strip">
     <div class="wrap strip-in">
       <p>Account Seller e Vendor sui marketplace</p>
-      <ul class="markets" aria-label="Marketplace gestiti">
-        <li>amazon.it</li><li>amazon.de</li><li>amazon.fr</li><li>amazon.es</li><li>amazon.nl</li><li>amazon.com</li>
-      </ul>
+      <div class="marquee">
+        <div class="marquee-track">
+          <ul class="markets" aria-label="Marketplace e strumenti Amazon che gestiamo"><li>amazon.it</li><li>amazon.de</li><li>amazon.fr</li><li>amazon.es</li><li>amazon.nl</li><li>amazon.com</li><li class="alt">Seller Central</li><li class="alt">Vendor Central</li><li class="alt">Sponsored Products</li><li class="alt">A+ Content</li><li class="alt">FBA</li><li class="alt">Brand Registry</li></ul>
+          <ul class="markets" aria-hidden="true"><li>amazon.it</li><li>amazon.de</li><li>amazon.fr</li><li>amazon.es</li><li>amazon.nl</li><li>amazon.com</li><li class="alt">Seller Central</li><li class="alt">Vendor Central</li><li class="alt">Sponsored Products</li><li class="alt">A+ Content</li><li class="alt">FBA</li><li class="alt">Brand Registry</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -312,7 +318,7 @@
     <div class="wrap about">
       <div class="about-card">
         <img src="assets/img/simbolo.webp" alt="" width="120" height="94" loading="lazy">
-        <div class="about-big">8<span>anni</span></div>
+        <div class="about-big"><span class="n" data-count="8">8</span><span>anni</span></div>
         <p>di lavoro quotidiano su Seller Central e Vendor Central</p>
       </div>
       <div class="about-copy">
@@ -365,7 +371,7 @@
           </ul>
           <div class="cta-stat">
             <div class="bubbles" aria-hidden="true"><span>IT</span><span>DE</span><span>FR</span><span>ES</span></div>
-            <div><b>8+</b><small>anni su Seller Central<br>e Vendor Central</small></div>
+            <div><b><span data-count="8">8</span>+</b><small>anni su Seller Central<br>e Vendor Central</small></div>
           </div>
         </div>
 
