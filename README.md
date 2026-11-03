@@ -9,7 +9,7 @@ Questa repository contiene l'**anteprima** del nuovo sito. Lo perfezioniamo qui 
 ```
 index.html              Homepage
 assets/css/style.css    Stili (colori, tipografia, layout)
-assets/js/main.js       Header, menu mobile, carosello servizi, modulo audit
+assets/js/main.js       Header, menu mobile, carosello servizi, modulo analisi
 assets/fonts/           Montserrat ospitato in locale (niente Google Fonts, quindi nessun problema GDPR)
 assets/img/             Logo in versione chiara e scura, simbolo, favicon, immagine per i social
 robots.txt              Regole per i motori di ricerca (versione di produzione)
@@ -40,7 +40,7 @@ I colori sono definiti come variabili all'inizio di `assets/css/style.css`.
 
 - [ ] Rimuovere `<meta name="robots" content="noindex, nofollow">` in `index.html` (serve solo a non far indicizzare l'anteprima)
 - [ ] Inserire email, telefono e P.IVA nel footer
-- [ ] Collegare il modulo dell'audit a una casella email o a un CRM
+- [ ] Collegare il modulo dell'analisi gratuita a una casella email o a un CRM
 - [ ] Creare le pagine Privacy policy e Cookie policy e collegarle nel footer
 - [ ] Inserire i link ai profili LinkedIn e Instagram
 - [ ] Sostituire il logo con un SVG vettoriale, se disponibile

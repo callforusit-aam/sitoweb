@@ -1,4 +1,4 @@
-/* Callforus — interazioni: header, menu mobile, carosello servizi, modulo audit */
+/* Callforus — interazioni: header, menu mobile, carosello servizi, modulo analisi */
 (function(){
   /* header border on scroll */
   var bar=document.getElementById('top-bar');
@@ -32,8 +32,8 @@
   window.addEventListener('resize',function(){go(cur,false)});
   go(1,false);update();
 
-  /* audit form: validation only; it is connected to a real inbox at launch */
-  var form=document.getElementById('audit-form'),err=document.getElementById('form-err');
+  /* modulo analisi: solo validazione; va collegato a una casella reale alla pubblicazione */
+  var form=document.getElementById('analisi-form'),err=document.getElementById('form-err');
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var bad=['f-nome','f-azienda','f-email','f-store'].filter(function(id){
@@ -84,7 +84,7 @@
     if(window.innerHeight+window.scrollY<document.documentElement.scrollHeight-4)return;
     document.querySelectorAll('.rv:not(.in)').forEach(function(el){revealIO.unobserve(el);el.classList.add('in')});
   },{passive:true});
-  ['.strip-in','.head','.probs > .prob','.track','.tools > .tool','.fit > .fit-col','.about > *','.faq > details','.cta','.foot-grid > div','.legal']
+  ['.strip-in','.head','.probs > .prob','.track','.tools > .tool','.agents-intro','.agents-panel','.fit > .fit-col','.about > *','.cases > .case','.faq > details','.cta','.foot-grid > div','.legal']
     .forEach(function(sel){
       document.querySelectorAll(sel).forEach(function(el){
         if(!belowFold(el))return;
@@ -100,17 +100,17 @@
   var playIO=new IntersectionObserver(function(entries){
     entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('play');playIO.unobserve(e.target)}});
   },{threshold:.35});
-  document.querySelectorAll('.steps,.slots,.demo').forEach(function(el){el.classList.add('armed');playIO.observe(el)});
+  document.querySelectorAll('.steps,.slots,.demo,.agent-list').forEach(function(el){el.classList.add('armed');playIO.observe(el)});
 
   /* contatori */
   function countUp(el,delay){
-    var to=parseInt(el.getAttribute('data-count'),10),pre=el.getAttribute('data-prefix')||'',dur=to>100?1500:900,t0=null;
-    el.textContent=pre+'0';
+    var to=parseInt(el.getAttribute('data-count'),10),pre=el.getAttribute('data-prefix')||'',suf=el.getAttribute('data-suffix')||'',dur=to>100?1500:900,t0=null;
+    el.textContent=pre+'0'+suf;
     setTimeout(function(){
       requestAnimationFrame(function step(ts){
         if(t0===null)t0=ts;
         var k=Math.min(1,(ts-t0)/dur),eased=1-Math.pow(1-k,3);
-        el.textContent=pre+Math.round(to*eased).toLocaleString('it-IT');
+        el.textContent=pre+Math.round(to*eased).toLocaleString('it-IT')+suf;
         if(k<1)requestAnimationFrame(step);
       });
     },delay||0);
