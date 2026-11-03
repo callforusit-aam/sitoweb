@@ -84,7 +84,7 @@
     if(window.innerHeight+window.scrollY<document.documentElement.scrollHeight-4)return;
     document.querySelectorAll('.rv:not(.in)').forEach(function(el){revealIO.unobserve(el);el.classList.add('in')});
   },{passive:true});
-  ['.strip-in','.head','.probs > .prob','.track','.tools > .tool','.agents-intro','.agents-panel','.fit > .fit-col','.about > *','.cases > .case','.faq > details','.cta','.foot-grid > div','.legal']
+  ['.strip-in','.head','.probs > .prob','.track','.tools > .tool','.agents-intro','.agents-panel','.method-side','.mstep','.quiz','.nofit','.about > *','.cases > .case','.faq > details','.cta','.foot-grid > div','.legal']
     .forEach(function(sel){
       document.querySelectorAll(sel).forEach(function(el){
         if(!belowFold(el))return;
@@ -100,7 +100,7 @@
   var playIO=new IntersectionObserver(function(entries){
     entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('play');playIO.unobserve(e.target)}});
   },{threshold:.35});
-  document.querySelectorAll('.steps,.slots,.demo,.agent-list').forEach(function(el){el.classList.add('armed');playIO.observe(el)});
+  document.querySelectorAll('.mstep,.nofit,.slots,.demo,.agent-list').forEach(function(el){el.classList.add('armed');playIO.observe(el)});
 
   /* contatori */
   function countUp(el,delay){
@@ -134,4 +134,66 @@
     });
     hero.addEventListener('pointerleave',function(){art.style.setProperty('--px',0);art.style.setProperty('--py',0)});
   }
+})();
+
+/* ------------------------------------------------------------
+   Metodo: linea di avanzamento e fase attiva
+   Per chi: test "Callforus fa per te?"
+   ------------------------------------------------------------ */
+(function(){
+  /* Metodo */
+  var list=document.getElementById('method-steps');
+  if(list){
+    var steps=[].slice.call(list.querySelectorAll('.mstep'));
+    var idx=[].slice.call(document.querySelectorAll('.method-index li'));
+    function method(){
+      var r=list.getBoundingClientRect(),mid=window.innerHeight*0.55;
+      var f=(mid-r.top-28)/(r.height-56);
+      list.style.setProperty('--fill',Math.max(0,Math.min(1,f)).toFixed(3));
+      var active=-1;
+      steps.forEach(function(s,i){var b=s.getBoundingClientRect();if(b.top<mid)active=i});
+      steps.forEach(function(s,i){s.classList.toggle('is-on',i===active);s.classList.toggle('is-done',i<active)});
+      idx.forEach(function(l,i){l.classList.toggle('is-on',i===active)});
+    }
+    window.addEventListener('scroll',method,{passive:true});
+    window.addEventListener('resize',method);
+    method();
+  }
+
+  /* Test di qualificazione */
+  var quiz=document.getElementById('quiz');
+  if(!quiz)return;
+  var qs=[].slice.call(quiz.querySelectorAll('.q')),out=document.getElementById('quiz-out'),
+      count=document.getElementById('quiz-count'),bar=document.getElementById('quiz-bar'),answers={};
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+  function render(){
+    var n=Object.keys(answers).length;
+    count.textContent=n+' di '+qs.length+' risposte';
+    bar.style.transform='scaleX('+(n/qs.length)+')';
+    out.classList.remove('ok','ko');
+    if(n<qs.length){
+      out.innerHTML='<p class="quiz-wait">'+(n===0?'Rispondi alle quattro domande per vedere il risultato.':'Ancora '+(qs.length-n)+(qs.length-n===1?' domanda':' domande')+' e vedi il risultato.')+'</p>';
+      return;
+    }
+    var no=qs.filter(function(q,i){return answers[i]===0});
+    if(!no.length){
+      out.classList.add('ok');
+      out.innerHTML='<strong>Il tuo account è nel nostro profilo ideale.</strong><p>Hai tutto quello che serve per crescere su Amazon con Callforus. Il primo passo è l\'analisi gratuita.</p><a class="btn btn--ink" href="#analisi">Richiedi l\'analisi gratuita <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>';
+    }else{
+      out.classList.add('ko');
+      out.innerHTML='<strong>Forse non è ancora il momento giusto.</strong><ul>'+no.map(function(q){return '<li>'+esc(q.getAttribute('data-no'))+'</li>'}).join('')+'</ul><a class="lnk" href="#analisi">Vuoi parlarne comunque? Scrivici</a>';
+    }
+  }
+  qs.forEach(function(q,i){
+    q.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var v=parseInt(b.getAttribute('data-v'),10);
+        answers[i]=v;
+        q.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+        q.classList.toggle('is-yes',v===1);q.classList.toggle('is-no',v===0);
+        render();
+      });
+    });
+  });
+  render();
 })();
