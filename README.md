@@ -43,8 +43,7 @@ I colori sono definiti come variabili all'inizio di `assets/css/style.css`.
 - [x] Rimuovere il blocco `noindex` (il sito ora è indicizzabile)
 - [x] Inserire email e telefono nel footer
 - [x] Inserire ragione sociale, indirizzo e P.IVA nel footer
-- [x] Collegare il modulo dell'analisi gratuita alla casella callforusit@gmail.com (via FormSubmit)
-- [ ] Attivare FormSubmit: alla prima richiesta arriva una mail di conferma su callforusit@gmail.com, bisogna cliccare "Activate Form"
+- [x] Collegare il modulo dell'analisi gratuita alla casella callforusit@gmail.com (via Web3Forms)
 - [x] Creare le pagine Privacy policy e Cookie policy e collegarle nel footer
 - [ ] Far verificare privacy e cookie policy da un professionista
 - [x] Inserire i link ai profili LinkedIn e Instagram
@@ -53,9 +52,8 @@ I colori sono definiti come variabili all'inizio di `assets/css/style.css`.
 
 ## Modulo "Analisi gratuita"
 
-Il modulo invia le richieste a **callforusit@gmail.com** tramite [FormSubmit](https://formsubmit.co), senza bisogno di un server.
+Il modulo invia le richieste a **callforusit@gmail.com** tramite [Web3Forms](https://web3forms.com), senza bisogno di un server.
 
-- Ogni richiesta arriva come email con tutti i campi in tabella. Rispondendo alla mail si scrive direttamente al cliente (l'indirizzo del cliente è impostato come destinatario della risposta).
-- Il cliente riceve in automatico una mail di conferma.
-- **Prima attivazione:** la prima volta che qualcuno invia il modulo, FormSubmit manda una mail di conferma a callforusit@gmail.com. Bisogna cliccare "Activate Form": da quel momento le richieste arrivano normalmente.
-- Dopo l'attivazione FormSubmit fornisce anche un indirizzo alternativo (una stringa casuale) da usare al posto dell'email in `assets/js/main.js` (`FORM_ENDPOINT`) e in `index.html` (attributo `action` del form), così l'email non resta visibile nel codice.
+- Ogni richiesta arriva come email con tutti i campi. Rispondendo alla mail si scrive direttamente al cliente (il suo indirizzo è impostato come destinatario della risposta).
+- La chiave del modulo (`WEB3FORMS_KEY` in `assets/js/main.js`) si trova nella dashboard su app.web3forms.com. È una chiave pubblica: può stare nel codice del sito.
+- Il piano gratuito consente 250 richieste al mese. La mail di conferma automatica al cliente richiede il piano a pagamento.

@@ -32,8 +32,9 @@
   window.addEventListener('resize',function(){go(cur,false)});
   go(1,false);update();
 
-  /* modulo analisi: invio tramite FormSubmit alla casella callforusit@gmail.com */
-  var FORM_ENDPOINT='https://formsubmit.co/ajax/callforusit@gmail.com';
+  /* modulo analisi: invio tramite Web3Forms alla casella callforusit@gmail.com */
+  var FORM_ENDPOINT='https://api.web3forms.com/submit';
+  var WEB3FORMS_KEY='__WEB3FORMS_KEY__'; /* chiave pubblica del modulo, da app.web3forms.com */
   var form=document.getElementById('analisi-form'),err=document.getElementById('form-err'),
       submit=document.getElementById('f-submit'),label=submit.querySelector('.btn-label');
   function val(id){return document.getElementById(id).value.trim()}
@@ -52,13 +53,14 @@
     if(val('f-hp')!=='')return; /* compilato da un bot */
 
     var data={
-      _subject:'Nuova richiesta di analisi gratuita: '+val('f-azienda'),
-      _template:'table',
-      _captcha:'false',
-      _autoresponse:'Ciao '+val('f-nome')+', abbiamo ricevuto la tua richiesta di analisi gratuita del tuo account Amazon. Ti ricontatteremo a breve a questo indirizzo email. Per qualsiasi domanda scrivi a info@callforus.it. Callforus, Amazon Sales & Acceleration Agency.',
+      access_key:WEB3FORMS_KEY,
+      subject:'Nuova richiesta di analisi gratuita: '+val('f-azienda'),
+      from_name:'Sito Callforus',
+      replyto:val('f-email'),
+      botcheck:false,
       'Nome e cognome':val('f-nome'),
       'Azienda':val('f-azienda'),
-      email:val('f-email'),
+      'Email':val('f-email'),
       'Telefono':val('f-tel')||'non indicato',
       'Store Amazon':val('f-store'),
       'Tipo di account':val('f-tipo'),
@@ -68,7 +70,7 @@
     };
     submit.disabled=true;label.textContent='Invio in corso…';
     fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){return r.json().catch(function(){return {}}).then(function(b){if(!r.ok||String(b.success)==='false'){var x=new Error(b.message||('HTTP '+r.status));x.activation=/activat/i.test(b.message||'');throw x;}})})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(b){if(!r.ok||String(b.success)==='false'){var x=new Error(b.message||('HTTP '+r.status));x.activation=false;throw x;}})})
       .then(function(){
         document.getElementById('done-name').textContent=val('f-nome').split(' ')[0];
         document.getElementById('done-email').textContent=val('f-email');
@@ -77,9 +79,7 @@
       })
       .catch(function(e){
         if(window.console)console.warn('Invio modulo non riuscito:',e&&e.message);
-        err.textContent=e&&e.activation
-          ?"Il modulo è in fase di attivazione: la richiesta non è stata inviata. Per ora scrivici a info@callforus.it."
-          :"Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto oppure scrivici a info@callforus.it.";
+        err.textContent="Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto oppure scrivici a info@callforus.it.";
         err.hidden=false;
       })
       .then(function(){submit.disabled=false;label.textContent="Richiedi l'analisi gratuita";});
