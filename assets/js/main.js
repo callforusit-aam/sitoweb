@@ -34,7 +34,7 @@
 
   /* modulo analisi: invio tramite Web3Forms alla casella callforusit@gmail.com */
   var FORM_ENDPOINT='https://api.web3forms.com/submit';
-  var WEB3FORMS_KEY='__WEB3FORMS_KEY__'; /* chiave pubblica del modulo, da app.web3forms.com */
+  var WEB3FORMS_KEY='43e7025d-f2c3-41c5-a7ec-98a8737c2dea'; /* chiave pubblica del modulo, da app.web3forms.com */
   var form=document.getElementById('analisi-form'),err=document.getElementById('form-err'),
       submit=document.getElementById('f-submit'),label=submit.querySelector('.btn-label');
   function val(id){return document.getElementById(id).value.trim()}
