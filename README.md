@@ -39,9 +39,10 @@ I colori sono definiti come variabili all'inizio di `assets/css/style.css`.
 ## Checklist prima della pubblicazione
 
 - [ ] Rimuovere `<meta name="robots" content="noindex, nofollow">` in `index.html` (serve solo a non far indicizzare l'anteprima)
-- [ ] Inserire email, telefono e P.IVA nel footer
+- [x] Inserire email e telefono nel footer
+- [ ] Inserire la P.IVA nel footer
 - [ ] Collegare il modulo dell'analisi gratuita a una casella email o a un CRM
 - [ ] Creare le pagine Privacy policy e Cookie policy e collegarle nel footer
-- [ ] Inserire i link ai profili LinkedIn e Instagram
+- [x] Inserire i link ai profili LinkedIn e Instagram
 - [ ] Sostituire il logo con un SVG vettoriale, se disponibile
 - [ ] Verificare il dominio su Google Search Console e inviare `sitemap.xml`
