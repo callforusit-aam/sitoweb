@@ -469,6 +469,11 @@ img,svg{display:block;max-width:100%}
 .me-id{display:grid;gap:2px;padding-left:4px}
 .me-id strong{font-size:var(--t-xl);font-weight:700}
 .me-id span{font-size:var(--t-sm);color:var(--muted);font-weight:500}
+.focus{background:var(--white);border:1.5px solid var(--ink);border-radius:var(--r-lg);padding:20px 22px;display:grid;gap:10px;box-shadow:6px 6px 0 var(--yellow)}
+.focus .k{font-size:var(--t-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.focus p{color:var(--muted)}
+.focus ul{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.focus li{font-size:.75rem;font-weight:600;background:var(--yellow-soft);border-radius:99px;padding:4px 11px}
 .sectors{display:grid;gap:12px;margin-top:6px}
 .sectors .k{font-size:var(--t-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .sectors ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
