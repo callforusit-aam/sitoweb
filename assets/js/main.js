@@ -68,15 +68,18 @@
     };
     submit.disabled=true;label.textContent='Invio in corso…';
     fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){return r.json().catch(function(){return {}}).then(function(b){if(!r.ok||String(b.success)==='false')throw new Error(b.message||'invio non riuscito');})})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(b){if(!r.ok||String(b.success)==='false'){var x=new Error(b.message||('HTTP '+r.status));x.activation=/activat/i.test(b.message||'');throw x;}})})
       .then(function(){
         document.getElementById('done-name').textContent=val('f-nome').split(' ')[0];
         document.getElementById('done-email').textContent=val('f-email');
         document.getElementById('form-body').hidden=true;
         document.getElementById('form-done').hidden=false;
       })
-      .catch(function(){
-        err.textContent="Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto oppure scrivici a info@callforus.it.";
+      .catch(function(e){
+        if(window.console)console.warn('Invio modulo non riuscito:',e&&e.message);
+        err.textContent=e&&e.activation
+          ?"Il modulo è in fase di attivazione: la richiesta non è stata inviata. Per ora scrivici a info@callforus.it."
+          :"Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto oppure scrivici a info@callforus.it.";
         err.hidden=false;
       })
       .then(function(){submit.disabled=false;label.textContent="Richiedi l'analisi gratuita";});
