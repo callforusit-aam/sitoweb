@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Agenzia Amazon per brand che vendono già | Callforus</title>
 <meta name="description" content="Callforus è l'agenzia Amazon per brand che vendono già: gestione account Seller e Vendor, schede prodotto, Amazon PPC e FBA, con strumenti AI proprietari. Richiedi l'analisi gratuita.">
-<!-- ANTEPRIMA: rimuovere la riga seguente prima della pubblicazione su callforus.it -->
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://callforus.it/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="it_IT">
@@ -552,7 +551,7 @@
           </div>
         </div>
 
-        <form class="form" id="analisi-form" novalidate aria-labelledby="form-title">
+        <form class="form" id="analisi-form" action="https://formsubmit.co/callforusit@gmail.com" method="POST" novalidate aria-labelledby="form-title">
           <div id="form-body" style="display:grid;gap:14px">
             <h3 id="form-title">Richiedi l'analisi</h3>
             <div class="row2">
@@ -569,14 +568,16 @@
               <div class="field"><label for="f-fatt">Fatturato mensile su Amazon</label><select id="f-fatt" name="fatturato"><option>Meno di 5.000 €</option><option selected>5.000 – 20.000 €</option><option>20.000 – 50.000 €</option><option>50.000 – 150.000 €</option><option>Oltre 150.000 €</option></select></div>
             </div>
             <div class="field"><label for="f-msg">Cosa vorresti migliorare? <span style="color:var(--muted);font-weight:500">(facoltativo)</span></label><textarea id="f-msg" name="messaggio" placeholder="Es. l'ACoS è troppo alto, vogliamo aprire la Germania…"></textarea></div>
-            <p class="form-err" id="form-err" role="alert" hidden>Controlla i campi evidenziati: servono nome, azienda, un'email valida e il link al tuo store.</p>
-            <button class="btn btn--ink" type="submit">Richiedi l'analisi gratuita <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-            <p class="fine">Inviando la richiesta accetti l'informativa privacy. Usiamo i tuoi dati solo per rispondere.</p>
+            <div class="hp" aria-hidden="true"><label for="f-hp">Lascia vuoto questo campo</label><input id="f-hp" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+            <label class="check" for="f-privacy"><input id="f-privacy" name="privacy" type="checkbox" value="accettata" required><span>Ho letto l'<a href="privacy-policy.html" target="_blank" rel="noopener">informativa privacy</a> e acconsento al trattamento dei miei dati per ricevere l'analisi gratuita.</span></label>
+            <p class="form-err" id="form-err" role="alert" hidden>Controlla i campi evidenziati: servono nome, azienda, un'email valida, il link al tuo store e la conferma dell'informativa privacy.</p>
+            <button class="btn btn--ink" type="submit" id="f-submit"><span class="btn-label">Richiedi l'analisi gratuita</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <p class="fine">Usiamo i tuoi dati solo per rispondere alla richiesta. Ti scriviamo dall'indirizzo info@callforus.it.</p>
           </div>
           <div class="done" id="form-done" hidden>
             <i><svg aria-hidden="true"><use href="#i-check"/></svg></i>
-            <strong>Richiesta pronta</strong>
-            <p>Questa è un'anteprima: il modulo non invia ancora dati e verrà collegato alla casella di Callforus quando il sito andrà online.</p>
+            <strong>Richiesta inviata</strong>
+            <p>Grazie <span id="done-name"></span>. Abbiamo ricevuto la tua richiesta di analisi e ti ricontatteremo all'indirizzo <b id="done-email"></b>. Ti abbiamo mandato anche una mail di conferma.</p>
           </div>
         </form>
       </div>
@@ -610,7 +611,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Callforus Agenzia del Digitale di Giuseppe Romano · Via Antonio Pacinotti 13, 93012 Gela (CL) · P.IVA IT02110530850</span>
-      <nav aria-label="Note legali"><a href="#">Privacy policy</a><a href="#">Cookie policy</a></nav>
+      <nav aria-label="Note legali"><a href="privacy-policy.html">Privacy policy</a><a href="cookie-policy.html">Cookie policy</a></nav>
     </div>
   </div>
 </footer>

@@ -32,18 +32,54 @@
   window.addEventListener('resize',function(){go(cur,false)});
   go(1,false);update();
 
-  /* modulo analisi: solo validazione; va collegato a una casella reale alla pubblicazione */
-  var form=document.getElementById('analisi-form'),err=document.getElementById('form-err');
+  /* modulo analisi: invio tramite FormSubmit alla casella callforusit@gmail.com */
+  var FORM_ENDPOINT='https://formsubmit.co/ajax/callforusit@gmail.com';
+  var form=document.getElementById('analisi-form'),err=document.getElementById('form-err'),
+      submit=document.getElementById('f-submit'),label=submit.querySelector('.btn-label');
+  function val(id){return document.getElementById(id).value.trim()}
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var bad=['f-nome','f-azienda','f-email','f-store'].filter(function(id){
       var el=document.getElementById(id),ok=el.value.trim()!==''&&el.checkValidity();
       el.setAttribute('aria-invalid',ok?'false':'true');return !ok;
     });
+    var privacy=document.getElementById('f-privacy');
+    if(!privacy.checked)bad.push('f-privacy');
+    privacy.closest('.check').classList.toggle('is-invalid',!privacy.checked);
+    err.textContent="Controlla i campi evidenziati: servono nome, azienda, un'email valida, il link al tuo store e la conferma dell'informativa privacy.";
     err.hidden=bad.length===0;
     if(bad.length){document.getElementById(bad[0]).focus();return}
-    document.getElementById('form-body').hidden=true;
-    document.getElementById('form-done').hidden=false;
+    if(val('f-hp')!=='')return; /* compilato da un bot */
+
+    var data={
+      _subject:'Nuova richiesta di analisi gratuita: '+val('f-azienda'),
+      _template:'table',
+      _captcha:'false',
+      _autoresponse:'Ciao '+val('f-nome')+', abbiamo ricevuto la tua richiesta di analisi gratuita del tuo account Amazon. Ti ricontatteremo a breve a questo indirizzo email. Per qualsiasi domanda scrivi a info@callforus.it. Callforus, Amazon Sales & Acceleration Agency.',
+      'Nome e cognome':val('f-nome'),
+      'Azienda':val('f-azienda'),
+      email:val('f-email'),
+      'Telefono':val('f-tel')||'non indicato',
+      'Store Amazon':val('f-store'),
+      'Tipo di account':val('f-tipo'),
+      'Fatturato mensile su Amazon':val('f-fatt'),
+      'Cosa vorrebbe migliorare':val('f-msg')||'non indicato',
+      'Consenso privacy':'Accettata il '+new Date().toLocaleString('it-IT')
+    };
+    submit.disabled=true;label.textContent='Invio in corso…';
+    fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(b){if(!r.ok||String(b.success)==='false')throw new Error(b.message||'invio non riuscito');})})
+      .then(function(){
+        document.getElementById('done-name').textContent=val('f-nome').split(' ')[0];
+        document.getElementById('done-email').textContent=val('f-email');
+        document.getElementById('form-body').hidden=true;
+        document.getElementById('form-done').hidden=false;
+      })
+      .catch(function(){
+        err.textContent="Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto oppure scrivici a info@callforus.it.";
+        err.hidden=false;
+      })
+      .then(function(){submit.disabled=false;label.textContent="Richiedi l'analisi gratuita";});
   });
 })();
 
