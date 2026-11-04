@@ -305,7 +305,8 @@ img,svg{display:block;max-width:100%}
 .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .foot ul a,.foot ul span{font-size:var(--t-sm);color:var(--muted);text-decoration:none}
 .foot ul a:hover{color:var(--ink)}
-.legal{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.legal{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font-size:.75rem;font-weight:500;color:var(--muted);line-height:1.6}
+.legal > span{max-width:52rem}
 .legal nav{display:flex;flex-wrap:wrap;gap:8px 20px}
 .legal a{text-decoration:none}
 .legal a:hover{color:var(--ink)}
